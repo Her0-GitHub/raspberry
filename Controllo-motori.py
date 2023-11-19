@@ -28,7 +28,6 @@ def endProgram():
 	GPIO.cleanup()
 	exit()
 
-
 def turn(motor, speed, direction):
 	if(speed < 0):
 		speed = 0
@@ -85,6 +84,19 @@ def diagonaleBotSx(speed):
 	turn(1, speed, )
 	turn(2, speed, )
 	turn(3, speed, )
+
+def rotazioneDx(speed):
+	print("ruota destra di " + str(speed))
+	turn(1, speed, True)
+	turn(2, speed, True)
+	turn(3, speed, True)
+
+
+def rotazioneSx(speed):
+	print("ruota sinistra di " + str(speed))
+	turn(1, speed, False)
+	turn(2, speed, False)
+	turn(3, speed, False)
 
 
 setup()
