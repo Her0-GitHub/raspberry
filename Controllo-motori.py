@@ -25,6 +25,9 @@ def setup(): # Imposta tutti i pin come output
 
 def endProgram():
 	print("gg goodbye lol ez")
+	turn(1, 0, True)
+	turn(2, 0, True)
+	turn(3, 0, True)
 	for i in enPWM:
 		i.stop()
 	GPIO.cleanup()
@@ -54,14 +57,14 @@ def indietro(speed):
 def destra(speed):
 	print("Destra di " + str(speed))
 	turn(1, speed, False)
-	turn(2, speed, True)
-	turn(3, speed, True)
+	turn(2, speed//2, True)
+	turn(3, speed//2, True)
 
 def sinitra(speed):
 	print("Sinistra di " + str(speed))
 	turn(1, speed, True)
-	turn(2, speed, False)
-	turn(3, speed, False)
+	turn(2, speed//2, False)
+	turn(3, speed//2, False)
 
 def digonaleTopDx(speed):
 	print("Diagonale top dx di " + str(speed))
@@ -107,7 +110,7 @@ while True:
 	try:
 		destra(100)
 		time.sleep(10)
-		sinitra(100)
-		time.sleep(10)
+		#indietro(100)
+		#time.sleep(10)
 	except KeyboardInterrupt:
 		endProgram()
