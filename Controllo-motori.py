@@ -1,12 +1,14 @@
 import RPi.GPIO as GPIO
 import time
 
+# Scrivere pin con il "conteggio" fisico, pin 1 parte verso USB
+
 #	rispettivamente
 #      m1  m2  m3
 
-EN  = [ 2, 12, 35]
-IN1 = [ 3, 13, 21]
-IN2 = [ 4, 15, 23]
+EN  = [ 3,  8, 35]
+IN1 = [ 5, 10, 21]
+IN2 = [ 7, 12, 23]
 
 def setup(): # Imposta tutti i pin come output
 	GPIO.setmode(GPIO.BOARD) # pin fisici non gpio
