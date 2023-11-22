@@ -4,9 +4,9 @@ import time
 #	rispettivamente
 #      m1  m2  m3
 
-EN  = [32, 12, 35]
-IN1 = [ 5, 13, 21]
-IN2 = [ 7, 15, 23]
+EN  = [ 2, 12, 35]
+IN1 = [ 3, 13, 21]
+IN2 = [ 4, 15, 23]
 
 def setup(): # Imposta tutti i pin come output
 	GPIO.setmode(GPIO.BOARD) # pin fisici non gpio
