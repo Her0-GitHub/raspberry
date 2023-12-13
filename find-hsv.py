@@ -30,37 +30,42 @@ hMin = sMin = vMin = hMax = sMax = vMax = 0
 phMin = psMin = pvMin = phMax = psMax = pvMax = 0
 
 while(1):
-    ret,image=cap.read()
-    # Get current positions of all trackbars
-    hMin = cv2.getTrackbarPos('HMin', 'image')
-    sMin = cv2.getTrackbarPos('SMin', 'image')
-    vMin = cv2.getTrackbarPos('VMin', 'image')
-    hMax = cv2.getTrackbarPos('HMax', 'image')
-    sMax = cv2.getTrackbarPos('SMax', 'image')
-    vMax = cv2.getTrackbarPos('VMax', 'image')
+    isSuccess, image=cap.read()
+    if isSuccess:
+        # Get current positions of all trackbars
+        hMin = cv2.getTrackbarPos('HMin', 'image')
+        sMin = cv2.getTrackbarPos('SMin', 'image')
+        vMin = cv2.getTrackbarPos('VMin', 'image')
+        hMax = cv2.getTrackbarPos('HMax', 'image')
+        sMax = cv2.getTrackbarPos('SMax', 'image')
+        vMax = cv2.getTrackbarPos('VMax', 'image')
 
-    # Set minimum and maximum HSV values to display
-    lower = np.array([hMin, sMin, vMin])
-    upper = np.array([hMax, sMax, vMax])
+        # Set minimum and maximum HSV values to display
+        lower = np.array([hMin, sMin, vMin])
+        upper = np.array([hMax, sMax, vMax])
 
-    # Convert to HSV format and color threshold
-    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-    mask = cv2.inRange(hsv, lower, upper)
-    result = cv2.bitwise_and(image, image, mask=mask)
+        # Convert to HSV format and color threshold
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        mask = cv2.inRange(hsv, lower, upper)
+        result = cv2.bitwise_and(image, image, mask=mask)
 
-    # Print if there is a change in HSV value
-    if((phMin != hMin) | (psMin != sMin) | (pvMin != vMin) | (phMax != hMax) | (psMax != sMax) | (pvMax != vMax) ):
-        print("(hMin = %d , sMin = %d, vMin = %d), (hMax = %d , sMax = %d, vMax = %d)" % (hMin , sMin , vMin, hMax, sMax , vMax))
-        phMin = hMin
-        psMin = sMin
-        pvMin = vMin
-        phMax = hMax
-        psMax = sMax
-        pvMax = vMax
-
-    # Display result image
-    cv2.imshow('image2', result)
+        # Print if there is a change in HSV value
+        if((phMin != hMin) | (psMin != sMin) | (pvMin != vMin) | (phMax != hMax) | (psMax != sMax) | (pvMax != vMax) ):
+            print("(hMin = %d , sMin = %d, vMin = %d), (hMax = %d , sMax = %d, vMax = %d)" % (hMin , sMin , vMin, hMax, sMax , vMax))
+            phMin = hMin
+            psMin = sMin
+            pvMin = vMin
+            phMax = hMax
+            psMax = sMax
+            pvMax = vMax
+        
+        # Display result image
+        cv2.imshow('image2', result)
+    else:
+        print("problemi con la read")
+    
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break
 
+cap.release()
 cv2.destroyAllWindows()
