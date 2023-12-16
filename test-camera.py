@@ -1,5 +1,6 @@
 import cv2 as cv
 import numpy as np
+from time import sleep
 
 minimo = np.array([0, 97, 146])
 massimo = np.array([10, 255, 255])
@@ -21,7 +22,8 @@ try:
             cv.imshow("Mask", mask)
         else:
             print("problemi con la read")
-            
+            sleep(5)
+
         if cv.waitKey(1) == ord('q'):
             break
 except KeyboardInterrupt:
