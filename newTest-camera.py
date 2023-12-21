@@ -3,7 +3,7 @@ import numpy as np
 import imutils
 from time import sleep
 
-import pallaverde
+from ControlloMotori import *
 
 # 0 Low 1 High
 orange = [np.array([4, 105, 164]), np.array([13, 255, 225])]
@@ -32,6 +32,8 @@ def trova_colore(immagine):
     return None, None, None, None, None
 
 
+setup()
+
 try:
     while True:
         isSuccess, frame = camera.read()
@@ -40,8 +42,10 @@ try:
             if x is not None:
                 if x < cameraPos['cX']:
                     print(f"x: {x}, y: {y}, w: {w}, h: {h}, a: {a} - vai a sinistra")
+                    sinitra()
                 elif x > cameraPos['cX']:
                     print(f"x: {x}, y: {y}, w: {w}, h: {h}, a: {a} - vai a destra")
+                    destra()
             else:
                 print("non ho trovato nulla")
         else:
@@ -53,5 +57,6 @@ try:
 except KeyboardInterrupt:
     print("aaa, non farlo usa 'q'")
 
+endProgram()
 camera.release()
 cv.destroyAllWindows()
