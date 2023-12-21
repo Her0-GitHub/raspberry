@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-import time
+from time import sleep
 
 # Scrivere pin con il "conteggio" fisico, pin 1 parte verso USB
 
@@ -31,7 +31,6 @@ def endProgram():
 	for i in enPWM:
 		i.stop()
 	GPIO.cleanup()
-	exit()
 
 def turn(motor, speed, direction):
 	if(speed < 0):
@@ -102,15 +101,3 @@ def rotazioneSx(speed):
 	turn(1, speed, False)
 	turn(2, speed, False)
 	turn(3, speed, False)
-
-
-setup()
-
-while True:
-	try:
-		destra(100)
-		time.sleep(10)
-		#indietro(100)
-		#time.sleep(10)
-	except KeyboardInterrupt:
-		endProgram()
